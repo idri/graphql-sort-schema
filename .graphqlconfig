@@ -1,0 +1,16 @@
+{
+  "name": "Storefront",
+  "schemaPath": "schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "local apollo": {
+        "url": "http://localhost:3000/api/graphql",
+        "introspect": true
+      },
+      "alpha-nightly": {
+        "url": "https://apollogql.alpha-nightly.dev-sap-comm.elkjop.com/api/graphql",
+        "introspect": true
+      }
+    }
+  }
+}
