@@ -14,8 +14,16 @@ schema {
 }
 
 `;
+const directiveToReplace = '@deprecated(reason:';
+const intellijDirective = '@deprecated(reason :';
+const scalarCommentToReplace = '"""The `Upload` scalar type represents a file upload."""';
+const scalarComment = '"The `Upload` scalar type represents a file upload."';
+const outputSchema = schemaText
+  .concat(printSchema(sortedSchema))
+  .replace(scalarCommentToReplace, scalarComment)
+  .split(directiveToReplace).join(intellijDirective);
 
-fs.writeFile('generated/schema.graphql', schemaText.concat(printSchema(sortedSchema)), function (err) {
+fs.writeFile('generated/schema.graphql', outputSchema, function (err) {
   if (err) throw err;
   console.log('Writing file: "generated/schema.graphql" ... Done!');
   fs.copyFile('generated/schema.graphql', '../../engr_storefront/schema.graphql', (error) => {
